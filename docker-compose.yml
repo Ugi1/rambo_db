@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  dbPostgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432/tcp
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: rambo_db
+    volumes:
+      - ./scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080 #soldaki port (8081) dockernin disi (disardan erisimi saglar). sagsaki dockernin icindeki port (adminer dockernin icinde bu port üzerinden islem yapiyor)
